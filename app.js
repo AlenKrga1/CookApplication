@@ -13,7 +13,39 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
+//coonet to mongodb
+mongoose.connect("mongodb://localhost:27017/cookBookDB", {useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.set("useCreateIndex", true);
 
+//database schema (Table)
+const foodSchema = new mongoose.Schema ({
+  recipeName:{type:String},
+  recipeDescription:{type:String},
+  recipeCuisine:{type:String},
+  //array of Users
+  user:[
+    {
+    name:{type:String},
+    country:{type:String}
+    }
+      ],
+      //array of  ingredients
+  ingredients:[
+    {
+    name:{type:String},
+    amount:{type:String},
+    allergen:{type:String}
+    }
+      ],
+ method:{type:String},
+ image:{type:String}
+
+});
+
+
+
+//model of database
+const Food = new mongoose.model("Foof", foodSchema);
 
 
 
