@@ -1,1 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title> <%=title%> </title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div>
+                <br><br><br>
+                <h4 class="text-center">Register New Cook</h4><br><br><br>
+                <%if(noErrors){ %>
+                <div class="alert alert-success">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">
+                        &#10007;
+                    </a>
+                    <%=success%>
+                </div>
+                <%}%>
+              <%if(hasErrors){ %>
+                <%for(var i=0;i< messages.length;i++){%>
+                <div class="alert alert-danger">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">
+                        &#10007;
+                    </a>
+                    <%=messages[i]%>
+                </div>
+                <%}%>
+             <% }%>
+                <form method="POST" action="/addNewData">
+                
+                    <div class="form-group ">
+                        <label for="">Recipe Name</label>
+                        <input class="form-control" name="name" type="text" style="margin-bottom:20px;">
+                    </div>
+                
+                    <div class="form-group ">
+                        <label for="">Recipe Description</label>
+                        <textarea name="description"  class="form-control" id="" cols="30" rows="5"></textarea>
+                    </div>
+                
+                    <div class="form-group ">
+                        <label for="">Recipe Cuisine</label>
+                        <input class="form-control" name="cuisine" type="text" style="margin-bottom:20px;">
+                    </div>
+                
+                    <div class="form-group ">
+                        <div class="col-lg-6">
+                            <label for="">username</label>
+                            <input class="form-control" name="username" type="text" style="margin-bottom:20px;">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Country</label>
+                            <input class="form-control" name="country" type="text" style="margin-bottom:20px;">
+                        </div>
+                    </div>
+                
+                 
+                
+                    <div class="form-group ">
+                        <label for="">Method</label>
+                        <input class="form-control" name="method" type="text" style="margin-bottom:20px;">
+                    </div>
+                
+                
+                <div class="form-group ">
+                          <!-- <label for="">Company Image</label><br> -->
+                          <button class="btn btn-lg btn-default" type="button" data-toggle="modal" data-target="#file">Add Cook Image </button>
+                          <span id="completed"></span>
+
+                          <div id="file" class="modal" tabindex="-1" role="dialog">
+                              <div class="modal-dialog">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                          <button type="button" id="close" class="close" data-dismiss="modal">&times;</button>
+                                          <div class="modal-title">Upload Image</div>
+                                      </div>
+
+                                      <div class="modal-body">
+                                          <div class="row">
+                                              <div class="progress">
+                                                  <div class="progress-bar" role="progressbar"></div>
+                                              </div>
+
+                                              <button class="btn btn-lg upload-btn btn-default" type="button">Upload File</button>
+                                              <input type="file" class="form-control" name="upload" id="upload-input" style="display:none">
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+
+                      </div>
+                   
+                    <div class="form-group  col-lg-4 " style="margin-left:380px;">
+                        <input type="submit" id="register" value="Save" class="form-control btn btn-primary" name="register">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="js/upload.js"></script>
+
+</body>
+</html>
