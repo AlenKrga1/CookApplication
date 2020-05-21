@@ -1,0 +1,24 @@
+.home{
+    margin-top: 150px;
+}
+.txt
+{
+font-style: italic;
+font-weight: bold;
+font-size: 4rem;
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+color: black;
+margin-top: 150px;
+}
+.img{
+    width: 500px;
+    height: 500px;
+    border-radius: 1000px;
+}
+.nav_bar li a{
+    color: white;
+}
+
+.drop li a{
+    color: black ;
+}
