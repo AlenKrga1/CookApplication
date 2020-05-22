@@ -48,15 +48,27 @@ const foodSchema = new mongoose.Schema({
   country: { type: String },
 
   //array of  ingredients
-  ingredients: [
+  ingredients: 
     {
       name: { type: String },
       amount: { type: String },
       allergen: { type: String },
-    },
-  ],
+
+      name1: { type: String },
+      amount1: { type: String },
+      allergen1: { type: String },
+
+      name2: { type: String },
+      amount2: { type: String },
+      allergen2: { type: String },
+
+      name3: { type: String },
+      amount3: { type: String },
+      allergen3: { type: String }
+    }
+  ,
   method: { type: String },
-  image: { type: String, default: "defaultPic.png" }
+  image: { type: String, default: "defaultPic.png" },
 });
 
 
@@ -98,7 +110,9 @@ app.get("*", (req, res, next) => {
 
 
 app.get('/',function(req,res){
-  res.send('this is my Cook App');
+ 
+  res.render("home", { title:"Home - Cook Book"});
+ 
 });
 
 
@@ -115,6 +129,23 @@ app.post("/addNewData", newDtataValidate, function (req, res) {
   newCook.recipeName = req.body.name;
   newCook.recipeDescription = req.body.description;
   newCook.recipeCuisine = req.body.cuisine;
+
+  newCook.ingredients.name =req.body.iName;
+  newCook.ingredients.amount=req.body.iAmount;
+  newCook.ingredients.allergen = req.body.iAllergen;
+
+  newCook.ingredients.name1 = req.body.iiName;
+  newCook.ingredients.amount1 = req.body.iiAmount;
+  newCook.ingredients.allergen1 = req.body.iiAllergen;
+
+  newCook.ingredients.name2 = req.body.iiiName;
+  newCook.ingredients.amount2 = req.body.iiiAmount;
+  newCook.ingredients.allergen2 = req.body.iiiAllergen;
+
+  newCook.ingredients.name3 = req.body.ivName;
+  newCook.ingredients.amount3 = req.body.ivAmount;
+  newCook.ingredients.allergen3 = req.body.ivAllergen;
+
   newCook.username = req.body.username;
   newCook.country = req.body.country;
   newCook.method = req.body.method;
@@ -137,7 +168,7 @@ function newDtataValidate(req,res,next){
   req.checkBody("username", "username is Required").notEmpty();
   req.checkBody("country", "Country is Required").notEmpty();
   req.checkBody("method", "method is Required").notEmpty();
-  req.checkBody("upload", "image is Required").notEmpty();
+ 
 
   const errors=req.validationErrors();
   if (errors) {
@@ -181,6 +212,122 @@ app.post("/upload", (req, res) => {
   form.parse(req);
 });
 
+
+
+
+
+app.get('/Search-By-UserName',function(req,res){
+  if (req.query.search) {
+    const regex = new RegExp(escapeRegex(req.query.search), "gi");
+    Food.find({username:regex},function(err,foundData){
+      res.render('byUserName',{title:'search by UserName',data:foundData});
+    });
+  }else{
+     Food.find({},function(err,foundData){
+      res.render('byUserName',{title:'search by UserName',data:foundData});
+    });
+  }
+});
+
+
+
+
+app.get('/Search-By-recipeName',function(req,res){
+  if (req.query.search) {
+    const regex = new RegExp(escapeRegex(req.query.search), "gi");
+    Food.find({recipeName:regex},function(err,foundData){
+      res.render('recipeName',{title:'search by recipeName',data:foundData});
+    });
+  }else{
+     Food.find({},function(err,foundData){
+      res.render('recipeName',{title:'search by recipeName',data:foundData});
+    });
+  }
+});
+
+
+app.get('/Search-By-recipeCuisine',function(req,res){
+  if (req.query.search) {
+    const regex = new RegExp(escapeRegex(req.query.search), "gi");
+    Food.find({recipeCuisine:regex},function(err,foundData){
+      res.render('recipeCuisine',{title:'search by recipeCuisine',data:foundData});
+    });
+  }else{
+     Food.find({},function(err,foundData){
+      res.render('recipeCuisine',{title:'search by recipeCuisine',data:foundData});
+    });
+  }
+});
+
+
+
+////Delete Item///
+app.post("/DeleteItem", function (req, res) {
+  const itemId = req.body.btnDelete;
+  Food.findByIdAndDelete(itemId, function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Successfully Deleted");
+      res.redirect("/");
+    }
+  });
+});
+
+
+
+///Update Date////
+
+app.get("/update/:id", function (req, res) {
+     var success = req.flash("success");
+     var errors = req.flash("error");
+  Food.findById(req.params.id, function (err, data) {
+    
+    if (err) {
+      console.log(err);
+    }
+    res.render("updateItem", { title: "Edit Cook", info: data ,success:success, noErrors: success.length > 0,messages:errors,hasErrors:errors.length>0});
+  });
+});
+
+
+app.post('/update/:id',function(req,res){
+  var editData = {
+    recipeName: req.body.name,
+    recipeDescription: req.body.description,
+    recipeCuisine: req.body.cuisine,
+    username: req.body.username,
+    country: req.body.country,
+    method: req.body.method,
+    name: req.body.iName,
+    amount: req.body.iAmount,
+    allergen: req.body.iAllergen,
+    name1: req.body.iiName,
+    amount1: req.body.iiAmount,
+    allergen1: req.body.iiAllergen,
+    name2: req.body.iiiName,
+    amount2: req.body.iiiAmount,
+    allergen2: req.body.iiiAllergen,
+    name3: req.body.ivName,
+    amount3: req.body.ivAmount,
+    allergen3: req.body.ivAllergen
+  };
+
+
+
+  Food.findByIdAndUpdate(req.params.id,editData,function(err){
+    if (err) {
+      res.redirect("/update/"+req.params.id);
+    }
+    res.redirect("/");
+  });
+  });
+
+
+
+function escapeRegex(text) {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+}
 
 app.listen(process.env.PORT||3000,function(){
   console.log('app is running on 3000');
