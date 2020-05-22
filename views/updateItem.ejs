@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title> <%=title%> </title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse ">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed btn btn-default" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+    
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-left nav_bar ">
+                <li><a href="/">Home</a></li>
+            </ul>
+                
+                <ul class="nav navbar-nav navbar-right nav_bar ">
+                    <li role="presentation" class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                            aria-expanded="false">
+                            Search <span class="caret"></span>
+                        </a>
+                            <ul class="dropdown-menu drop">
+                                <li><a href="/Search-By-UserName">By Username</a></li>
+                                <li><a href="/Search-By-recipeName">By Recipe Name</a></li>
+                                <li><a href="/Search-By-recipeCuisine">By Recipe Cuisine</a></li>
+                            </ul>
+                    </li>
+                    <li><a href="/addNewData" target="_blank">Add Recipe</a></li>
+    
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div>
+                <br><br><br>
+                <h4 class="text-center">Edit Cook</h4><br><br><br>
+                <%if(noErrors){ %>
+                <div class="alert alert-success">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">
+                        &#10007;
+                    </a>
+                    <%=success%>
+                </div>
+                <%}%>
+              <%if(hasErrors){ %>
+                <%for(var i=0;i< messages.length;i++){%>
+                <div class="alert alert-danger">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">
+                        &#10007;
+                    </a>
+                    <%=messages[i]%>
+                </div>
+                <%}%>
+             <% }%>
+                <form method="POST" >
+                
+                    <div class="form-group ">
+                        <label for="">Recipe Name</label>
+                        <input class="form-control" name="name" type="text"  style="margin-bottom:20px;" value="<%= info.recipeName %> ">
+                    </div>
+                
+                    <div class="form-group ">
+                        <label for="">Recipe Description</label>
+                        <textarea name="description"  class="form-control" id="" cols="30" rows="5" ><%= info.recipeDescription %></textarea>
+                    </div>
+                
+                    <div class="form-group ">
+                        <label for="">Recipe Cuisine</label>
+                        <input class="form-control" name="cuisine" type="text" style="margin-bottom:20px;" value="<%= info.recipeCuisine %> ">
+                    </div>
+                    <div class="form-group "><br>
+                        <h3>Ingredients</h3>
+                        <div class="col-lg-4">
+                            <label for="">Name</label>
+                            <input class="form-control" name="iName" type="text" style="margin-bottom:20px;" value="<%=info.ingredients.name%>">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Amount</label>
+                            <input class="form-control" name="iAmount" type="text" style="margin-bottom:20px;" value="<%=info.ingredients.amount%>">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Allergen</label>
+                            <input class="form-control" name="iAllergen" type="text" style="margin-bottom:20px;"value="<%=info.ingredients.allergen%>">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Name</label>
+                            <input class="form-control" name="iiName" type="text" style="margin-bottom:20px;" value="<%=info.ingredients.name1%>">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Amount</label>
+                            <input class="form-control" name="iiAmount" type="text" style="margin-bottom:20px;" value="<%=info.ingredients.amount1%>">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Allergen</label>
+                            <input class="form-control" name="iiAllergen" type="text" style="margin-bottom:20px;" value="<%=info.ingredients.allergen1%>">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Name</label>
+                            <input class="form-control" name="iiiName" type="text" style="margin-bottom:20px;" value="<%=info.ingredients.name2%>">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Amount</label>
+                            <input class="form-control" name="iiiAmount" type="text" style="margin-bottom:20px;" value="<%=info.ingredients.amount2%>">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Allergen</label>
+                            <input class="form-control" name="iiiAllergen" type="text" style="margin-bottom:20px;" value="<%=info.ingredients.allergen2%>">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Name</label>
+                            <input class="form-control" name="ivName" type="text" style="margin-bottom:20px;" value="<%=info.ingredients.name3%>">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Amount</label>
+                            <input class="form-control" name="ivAmount" type="text" style="margin-bottom:20px;" value="<%=info.ingredients.amount3%>">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Allergen</label>
+                            <input class="form-control" name="ivAllergen" type="text" style="margin-bottom:20px;" value="<%=info.ingredients.allergen3%>">
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-lg-6">
+                            <label for="">username</label>
+                            <input class="form-control" name="username" type="text" style="margin-bottom:20px;" value="<%= info.username %> ">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Country</label>
+                            <input class="form-control" name="country" type="text" style="margin-bottom:20px;" value="<%= info.country %> ">
+                        </div>
+                    </div>
+                
+                 
+                
+                    <div class="form-group ">
+                        <label for="">Method</label>
+                        <input class="form-control" name="method" type="text" style="margin-bottom:20px;" value="<%= info.method %> ">
+                    </div>
+                
+               <span style="color: red;">*IMAGE STILL THE SAME IMAGE*</span>
+                   
+                   
+                    <div class="form-group  col-lg-4 " style="margin-left:380px;">
+                        <input type="submit" id="register" value="Update" class="form-control btn btn-success" name="register">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+   
+
+</body>
+</html>
