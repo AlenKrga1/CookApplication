@@ -34,7 +34,9 @@ app.use(flash());
 
 
 //coonet to mongodb
-mongoose.connect("mongodb://localhost:27017/cookBookDB", {useNewUrlParser: true, useUnifiedTopology: true });
+//mongoose.connect("mongodb://localhost:27017/cookBookDB", {useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb+srv://alen:alen123@coockbook-yhjfy.mongodb.net/cookBookDB", { useNewUrlParser: true, useUnifiedTopology: true });
+
 mongoose.set("useCreateIndex", true);
 
 //database schema (Table)
