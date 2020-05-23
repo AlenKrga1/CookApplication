@@ -262,6 +262,14 @@ app.get('/Search-By-recipeCuisine',function(req,res){
 });
 
 
+app.get('/viewRecepties', function (req, res) {
+ 
+    Food.find({}, function (err, foundData) {
+      res.render('viewRecepties', { title: 'View Recepties', data: foundData });
+    });
+});
+
+
 
 ////Delete Item///
 app.post("/DeleteItem", function (req, res) {
@@ -314,9 +322,6 @@ app.post('/update/:id',function(req,res){
     amount3: req.body.ivAmount,
     allergen3: req.body.ivAllergen
   };
-
-
-
   Food.findByIdAndUpdate(req.params.id,editData,function(err){
     if (err) {
       res.redirect("/update/"+req.params.id);
@@ -326,6 +331,16 @@ app.post('/update/:id',function(req,res){
   });
 
 
+///view Date////
+
+app.get("/viewcook/:id", function (req, res) {
+  Food.findById(req.params.id, function (err, data) {
+    if (err) {
+      console.log(err);
+    }
+    res.render("viewItem", { title: "View Cook", info: data});
+  });
+});
 
 function escapeRegex(text) {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
