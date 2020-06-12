@@ -1,4 +1,5 @@
 //jshint esversion:6
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -6,13 +7,11 @@ const mongoose = require("mongoose");
 var flash = require("express-flash");
 const expressValidator = require("express-validator");
 const session = require("express-session");
-
 const app = express();
 
 const formidable = require("formidable");
 const path = require("path");
 const fs = require("fs");
-
 
 
 app.set('view engine', 'ejs');
@@ -32,10 +31,9 @@ app.use(session({
 }));
 app.use(flash());
 
-
 //coonet to mongodb
 //mongoose.connect("mongodb://localhost:27017/cookBookDB", {useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connect("mongodb+srv://alen:alen123@coockbook-yhjfy.mongodb.net/cookBookDB", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb+srv://" + process.env.MONGO_USERNAME + ":" +process.env.MONGO_PASSWORD+"@coockbook-yhjfy.mongodb.net/cookBookDB", { useNewUrlParser: true, useUnifiedTopology: true });
 
 mongoose.set("useCreateIndex", true);
 
