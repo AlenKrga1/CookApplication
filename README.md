@@ -161,4 +161,4 @@ And i Pushed to Heroku
 Media All images for this project were obtained from Google Images.
 Youtube tutorials which help me to understood things which was not clear to me.
 Slack chanal with tons of students answers
-and stack overflow for tons of information aviable online
+and stack overflow for tons of information available online
